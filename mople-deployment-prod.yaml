@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mople-prod
+    labels:
+        app: mople-prod
+    namespace: mople
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: mople-prod
+    template:
+        metadata:
+            labels:
+                app: mople-prod
+        spec:
+            affinity:
+                podAntiAffinity:
+                    preferredDuringSchedulingIgnoredDuringExecution:
+                        - podAffinityTerm:
+                              labelSelector:
+                                  matchExpressions:
+                                      - key: key
+                                        operator: In
+                                        values:
+                                            - worker1
+                              topologyKey: kubernetes.io/hostname
+                          weight: 100
+            containers:
+                - name: mople-prod
+                  image: kmdy7991/groupmeet:0.0
+                  env:
+                      - name: JAVA_TOOL_OPTIONS
+                        value: '-Duser.timezone=Asia/Seoul'
+                      - name: PROFILE
+                        value: 'prod'
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 8284
+                  envFrom:
+                      - configMapRef:
+                            name: spring
+                  resources:
+                      requests:
+                          memory: 512Mi
+                      limits:
+                          memory: 1024Mi

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: mople-prod-svc
+    namespace: mople
+spec:
+    type: ClusterIp
+    selector:
+        app: mople-prod
+    ports:
+        - protocol: TCP
+          port: 8284
+          targetPort: 8284
