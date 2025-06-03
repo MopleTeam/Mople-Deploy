@@ -37,10 +37,7 @@ spec:
                         value: 'dev'
                   imagePullPolicy: Always
                   ports:
-                      - containerPort: 8080
-                  envFrom:
-                      - configMapRef:
-                            name: spring
+                      - containerPort: 8284
                   resources:
                       requests:
                           memory: 256Mi
