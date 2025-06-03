@@ -4,7 +4,7 @@ metadata:
     name: mople-dev-svc
     namespace: mople
 spec:
-    type: ClusterIp
+    type: ClusterIP
     selector:
         app: mople-dev
     ports:
