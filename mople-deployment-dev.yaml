@@ -29,7 +29,7 @@ spec:
                           weight: 100
             containers:
                 - name: mople-dev
-                  image: kmdy7991/groupmeet:2
+                  image: kmdy7991/groupmeet:2.7
                   env:
                       - name: JAVA_TOOL_OPTIONS
                         value: '-Duser.timezone=Asia/Seoul'
